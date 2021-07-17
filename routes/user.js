@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const {sayHi, signIn, signUp} = require('../controllers/user');
-const {userSignupValidator} = require('../validator/index');
-
-
-router.get('/', sayHi);
-router.post('/signup', userSignupValidator, signUp );
-router.post('/signin', signIn);
-
+const { requireSignin, isAdmin, isAuth} = require('../controllers/auth');
+const { userById } = require('../controllers/user');
+                            // middleware    middleware
+router.get("/secret/:userId" , requireSignin, isAuth, isAdmin, (req, res) => {
+    res.json( {
+        user : req.profile
+    });
+});
+router.param('userId', userById);
 module.exports = router;
