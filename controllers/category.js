@@ -65,13 +65,13 @@ const getAllCategories = (req, res) => {
                 err : errorHandler(err)
             });
         }
-        let categoryMap = {};
+        let categoryList = [];
 
-        categories.forEach(function(category) {
-            categoryMap[category._id] = category;
+        categories.forEach(category => {
+            categoryList.push(category);
         });
     
-        res.send(categoryMap);
+        res.send(categoryList);
     })
 }
 module.exports = {createCategory, getCategory, categoryById, deleteCategory, updateCategory, getAllCategories};

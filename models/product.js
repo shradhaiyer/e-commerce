@@ -30,6 +30,10 @@ const productSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
+        sold : {
+            type: Number, 
+            defualt: 0
+        },
         photo:{
             data: Buffer,
             contentType: String
